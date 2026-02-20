@@ -58,10 +58,8 @@ CLIENT_CONFIG = {
         "vendor_id": 6527,
         "product_name": "SR-OS-MG",
         "firmware_revision": 1,
-        "host_ip_address": "198.18.153.61",
-        #"host_ip_address": "192.168.1.5",
-        "application_id": 0,
-        "supported_vendor_ids": [10415, 5535],
+        "host_ip_address": "0.0.0.0",   # SAFE BIND
+        "supported_vendor_ids": {10415, 5535},
         "auth_application_id": APP_DIAMETER_CREDIT_CONTROL_APPLICATION
 
     },
@@ -125,11 +123,10 @@ def main():
             realm_name=CLIENT_CONFIG["identity"]["origin_realm"],
             ip_addresses=[CLIENT_CONFIG["identity"]["host_ip_address"]],
             tcp_port=0,
-            vendor_ids=[6527],
-            application_id=0,
-            supported_vendor_ids=[10415, 5535],
-            product_name="SR-OS-MG"
-                                           )
+            # vendor_ids=[CLIENT_CONFIG["identity"]["vendor_id"]]
+            vendor_ids=[6527]
+
+                                )
 
         logger.info("[OK] Client node created")
 
